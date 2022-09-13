@@ -8,6 +8,6 @@
         public string RoomOccupancyStatus { get; set; }
         public DateTime LastCleaned { get; set; }
         public string CleaningStatus { get; set; }
-        public string Comments { get; set; }
+        public string Comment { get; set; }
     }
 }

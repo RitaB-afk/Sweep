@@ -1,3 +1,4 @@
+using Microsoft.Identity.Client;
 using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
