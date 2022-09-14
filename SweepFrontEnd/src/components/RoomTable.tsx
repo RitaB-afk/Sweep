@@ -143,7 +143,7 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
       iconClassName: classNames.fileIconHeaderIcon,
       ariaLabel: "Column operations for File type, Press to sort on File type",
       minWidth: 20,
-      maxWidth: 20,
+      maxWidth: 100,
       onColumnClick,
       onRender: (item: IDocument) => {
         return <span>{item.roomNumber}</span>;
@@ -157,8 +157,8 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
       className: classNames.fileIconCell,
       iconClassName: classNames.fileIconHeaderIcon,
       ariaLabel: "Column operations for File type, Press to sort on File type",
-      minWidth: 20,
-      maxWidth: 20,
+      minWidth: 80,
+      maxWidth: 150,
       onColumnClick,
       onRender: (item: IDocument) => {
         return <span>{item.roomOccupancyStatus}</span>;
@@ -170,7 +170,7 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
       name: "roomCategory",
       fieldName: "roomCategory",
       minWidth: 50,
-      maxWidth: 150,
+      maxWidth: 100,
       isSorted: undefined,
       isRowHeader: true,
       isResizable: true,
