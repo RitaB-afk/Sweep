@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ContextualMenu, IContextualMenuProps, IIconProps } from "@fluentui/react";
 import { IconButton } from "@fluentui/react/lib/Button";
-import { IDocument } from "./RoomTable";
+import { Room } from "../data/data";
 
 export interface IButtonExampleProps {
   // These are set based on the toggles shown above the examples (not needed in real code)
@@ -9,25 +9,25 @@ export interface IButtonExampleProps {
   checked?: boolean;
 }
 export interface itemProps {
-  itemProps: IDocument;
+  itemProps: Room;
 }
 export const MoreButton: React.FunctionComponent<itemProps> = props => {
   const { itemProps } = props;
 
 
-  const deactivateSubscription = (item: IDocument) => {
-    props.itemProps.statusIcon = "Checkbox";
+  const deactivateSubscription = (item: Room) => {
+    props.itemProps.CleaningStatus = "Checkbox";
   };
 
-  const activateSubscription = (item: IDocument) => {
-    props.itemProps.statusIcon = "CheckboxComposite";
+  const activateSubscription = (item: Room) => {
+    props.itemProps.CleaningStatus = "CheckboxComposite";
   };
 
-  const goToDetails = (item: IDocument) => {
+  const goToDetails = (item: Room) => {
     console.log(item);
   };
 
-  const changeTrialDate = (item: IDocument) => {
+  const changeTrialDate = (item: Room) => {
     console.log(item);
   };
   const menuProps: IContextualMenuProps = {

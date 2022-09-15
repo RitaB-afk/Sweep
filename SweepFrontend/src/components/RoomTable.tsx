@@ -4,7 +4,7 @@ import { DetailsList, DetailsListLayoutMode, SelectionMode, IColumn } from "@flu
 import { Dialog, Modal } from "@fluentui/react";
 import { mergeStyleSets } from "@fluentui/react/lib/Styling";
 import { IconButton, ISearchBoxStyles, SearchBox, TooltipHost } from "@fluentui/react";
-import { Room, rooms } from "../data/data";
+import { Room } from "../data/data";
 import { useState } from "react";
 import { MoreButton } from "./MoreButton";
 
@@ -72,7 +72,7 @@ const classNames = mergeStyleSets({
 
 export interface IDetailsListDocumentsExampleState {
   columns: IColumn[];
-  items: IDocument[];
+  items: Room[];
   selectionDetails: string;
   isModalSelection: boolean;
   isCompactMode: boolean;
@@ -80,25 +80,23 @@ export interface IDetailsListDocumentsExampleState {
 }
 
 const _generateDocuments = (customers2: Room[]) => {
-  const items: IDocument[] = customers2.map(item => {
+  const rooms: Room[] = customers2.map(item => {
     return {
-      statusIcon: item.cleaningStatus,
+      id: item.id,
       key: item.id,
-      roomNumber: item.roomNumber,
-      roomCategory: item.roomCategory,
-      roomLevel: item.roomLevel,
-      roomOccupancyStatus: item.roomOccupancyStatus,
-      lastCleaned: item.lastCleaned,
-      cleaningStatus: item.cleaningStatus,
-      comment: item.comment
+      RoomNumber: item.RoomNumber,
+      RoomCategory: item.RoomCategory,
+      RoomLevel: item.RoomLevel,
+      RoomOccupancyStatus: item.RoomOccupancyStatus,
+      LastCleaned: item.LastCleaned,
+      CleaningStatus: item.CleaningStatus,
+      Comment: item.Comment
     };
   });
-  return items;
+  return rooms;
 };
-// @ts-ignore
-export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleState> = ({
-}) => {
-  const allItems: IDocument[] = _generateDocuments(rooms);
+export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleState> = ({items}) => {
+const allItems = _generateDocuments(items)
   const onColumnClick = (ev: React.MouseEvent<HTMLElement>, column: IColumn): void => {
     const newColumns: IColumn[] = columns.slice();
     const currColumn: IColumn = newColumns.filter(currCol => column.key === currCol.key)[0];
@@ -115,60 +113,57 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
     setSortedColumns({
       columns: newColumns,
     });
-    setItems({
-      items: newItems,
-    });
   };
   const columns: IColumn[] = [
     {
       key: "column1",
-      name: "C",
-      fieldName: "C",
-      className: classNames.fileIconCell,
-      iconClassName: classNames.fileIconHeaderIcon,
-      ariaLabel: "Column operations for File type, Press to sort on File type",
-      minWidth: 20,
-      maxWidth: 20,
-      onColumnClick,
-      onRender: (item: IDocument) => {
-        return <span>{item.roomNumber}</span>;
-      },
-      isPadded: true,
-    },
-    {
-      key: "column2",
-      name: "roomNumber",
-      fieldName: "roomNumber",
+      name: "Cleaning status",
+      fieldName: "CleaningStatus",
       className: classNames.fileIconCell,
       iconClassName: classNames.fileIconHeaderIcon,
       ariaLabel: "Column operations for File type, Press to sort on File type",
       minWidth: 20,
       maxWidth: 100,
       onColumnClick,
-      onRender: (item: IDocument) => {
-        return <span>{item.roomNumber}</span>;
+      onRender: (item: Room) => {
+        return <span>{item.CleaningStatus}</span>;
+      },
+      isPadded: true,
+    },
+    {
+      key: "column2",
+      name: "Number",
+      fieldName: "RoomNumber",
+      className: classNames.fileIconCell,
+      iconClassName: classNames.fileIconHeaderIcon,
+      ariaLabel: "Column operations for File type, Press to sort on File type",
+      minWidth: 20,
+      maxWidth: 50,
+      onColumnClick,
+      onRender: (item: Room) => {
+        return <span>{item.RoomNumber}</span>;
       },
       isPadded: true,
      },
     {
       key: "column3",
-      name: "roomOccupancyStatus",
-      fieldName: "roomOccupancyStatus",
+      name: "Occupancy",
+      fieldName: "RoomOccupancyStatus",
       className: classNames.fileIconCell,
       iconClassName: classNames.fileIconHeaderIcon,
       ariaLabel: "Column operations for File type, Press to sort on File type",
       minWidth: 80,
-      maxWidth: 150,
+      maxWidth: 90,
       onColumnClick,
-      onRender: (item: IDocument) => {
-        return <span>{item.roomOccupancyStatus}</span>;
+      onRender: (item: Room) => {
+        return <span>{item.RoomOccupancyStatus}</span>;
       },
       isPadded: true,
     },
     {
       key: "column4",
-      name: "roomCategory",
-      fieldName: "roomCategory",
+      name: "Category",
+      fieldName: "RoomCategory",
       minWidth: 50,
       maxWidth: 100,
       isSorted: undefined,
@@ -182,45 +177,45 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
     },
     {
       key: "column5",
-      name: "roomLevel",
-      fieldName: "roomLevel",
+      name: "Floor",
+      fieldName: "RoomLevel",
       minWidth: 50,
-      maxWidth: 150,
+      maxWidth: 50,
       isResizable: true,
       onColumnClick,
       data: "number",
-      onRender: (item: IDocument) => {
-        return <span>{item.roomLevel}</span>;
+      onRender: (item: Room) => {
+        return <span>{item.RoomLevel}</span>;
       },
       isPadded: true,
     },
     {
       key: "column6",
-      name: "comment",
-      fieldName: "comment",
+      name: "Comment",
+      fieldName: "Comment",
       minWidth: 50,
       maxWidth: 150,
       isResizable: true,
       isCollapsible: true,
       data: "string",
       onColumnClick,
-      onRender: (item: IDocument) => {
-        return <span>{item.comment}</span>;
+      onRender: (item: Room) => {
+        return <span>{item.Comment}</span>;
       },
       isPadded: true,
     },
     {
       key: "column7",
-      name: "lastCleaned",
-      fieldName: "lastCleaned",
+      name: "Last Cleaned",
+      fieldName: "LastCleaned",
       minWidth: 50,
       maxWidth: 150,
       isResizable: true,
       isCollapsible: true,
       data: "string",
       onColumnClick,
-      onRender: (item: IDocument) => {
-        return <span>{item.lastCleaned}</span>;
+      onRender: (item: Room) => {
+        return <span>{item.LastCleaned}</span>;
       },
     },
     {
@@ -236,7 +231,7 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
       isCollapsible: true,
       data: "string",
       onColumnClick,
-      onRender: (item:IDocument) => {
+      onRender: (item:Room) => {
         return <MoreButton itemProps={item}/>;
       },
     }
@@ -246,10 +241,6 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
 
   const [sortedColumns, setSortedColumns] = useState({
     columns,
-  });
-
-  const [items, setItems] = useState({
-    items: allItems,
   });
 
 
@@ -267,13 +258,12 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
   };
 
   const _onChangeText = (ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, text: string): void => {
-    // @ts-ignore
-    setItems({
-      items: text ? allItems.filter((item: IDocument) => item.roomCategory.toLowerCase().indexOf(text) > -1) : allItems,
-    });
+   // setItems({
+   //   items: text ? allItems.filter((item: Room) => item.RoomCategory.toLowerCase().indexOf(text) > -1) : allItems,
+  //  });
   };
-  const _onItemInvoked = (item: IDocument): void => {
-    alert(`Item invoked: ${item.roomNumber}`);
+  const _onItemInvoked = (item: Room): void => {
+    alert(`Item invoked: ${item.LastCleaned}`);
 
   };
 
@@ -287,7 +277,7 @@ export const RoomTable: React.FunctionComponent<IDetailsListDocumentsExampleStat
       </div>
       <DetailsList
         columns={columns}
-        items={items.items}
+        items={items}
         selectionMode={SelectionMode.multiple}
         getKey={_getKey}
         setKey="multiple"

@@ -1,43 +1,43 @@
 export interface Room {
   id: Number;
-  roomNumber: number;
-  roomCategory: string;
-  roomLevel: number;
-  roomOccupancyStatus: string;
-  lastCleaned: string;
-  cleaningStatus: string;
-  comment: string;
+  RoomNumber: number;
+  RoomCategory: string;
+  RoomLevel: number;
+  RoomOccupancyStatus: string;
+  LastCleaned: string;
+  CleaningStatus: string;
+  Comment: string;
 }
 
 export const rooms : Room[] = [
     {
         id: 1,
-        roomNumber: 1,
-        roomCategory: "single",
-        roomLevel: 10,
-        roomOccupancyStatus : "occupied",
-        lastCleaned: "12.09.2022",
-        cleaningStatus: "cleaned",
-        comment: "N/A" ,
+        RoomNumber: 1,
+        RoomCategory: "single",
+        RoomLevel: 10,
+        RoomOccupancyStatus : "occupied",
+        LastCleaned: "12.09.2022",
+        CleaningStatus: "cleaned",
+        Comment: "N/A" ,
     },
     {
       id: 2,
-      roomNumber: 2,
-      roomCategory: "double",
-      roomLevel: 10,
-      roomOccupancyStatus : "occupied",
-      lastCleaned: "11.09.2022",
-      cleaningStatus: "not cleaned",
-      comment: "N/A" ,
+      RoomNumber: 2,
+      RoomCategory: "double",
+      RoomLevel: 10,
+      RoomOccupancyStatus : "occupied",
+      LastCleaned: "11.09.2022",
+      CleaningStatus: "not cleaned",
+      Comment: "N/A" ,
   },
   {
     id: 3,
-    roomNumber: 3,
-    roomCategory: "suite",
-    roomLevel: 10,
-    roomOccupancyStatus : "occupied",
-    lastCleaned: "12.09.2022",
-    cleaningStatus: "not cleaned",
-    comment: "N/A" ,
+    RoomNumber: 3,
+    RoomCategory: "suite",
+    RoomLevel: 10,
+    RoomOccupancyStatus : "occupied",
+    LastCleaned: "12.09.2022",
+    CleaningStatus: "not cleaned",
+    Comment: "N/A" ,
 }
 ]

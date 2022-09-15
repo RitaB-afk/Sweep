@@ -2,9 +2,7 @@ import * as React from "react";
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
 import { loginRequest } from "./authConfig";
 import { PageLayout } from "./components/PageLayout";
-import { ProfileData } from "./components/ProfileData";
 import { callMsGraph } from "./graph";
-import Button from "react-bootstrap/Button";
 import "./styles/App.css";
 import { RoomTable } from "./components/RoomTable";
 import { initializeIcons } from '@fluentui/font-icons-mdl2';
@@ -16,6 +14,12 @@ initializeIcons();
 const ProfileContent = () => {
     const { instance, accounts } = useMsal();
     const [graphData, setGraphData] = React.useState(null);
+    const [rooms, setRooms] = React.useState([]);
+    React.useEffect(() => {
+        fetch((`https://msucase22.azurewebsites.net/api/room`)) // your url may look different
+          .then(resp => resp.json())
+          .then(data => setRooms(data)) // set data to state
+      }, []);
 
     function RequestProfileData() {
         // Silently acquires an access token which is then attached to a request for MS Graph data
@@ -30,8 +34,7 @@ const ProfileContent = () => {
     return (
         <>
         <h5 className="card-title">Welcome {accounts[0].name}</h5>
-      
-        <RoomTable columns={[]} items={[]} selectionDetails={""} isModalSelection={false} isCompactMode={false}></RoomTable>
+        <RoomTable columns={[]} items={rooms} selectionDetails={""} isModalSelection={false} isCompactMode={false}></RoomTable>
     </>
     );
 };
